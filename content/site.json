@@ -17,92 +17,134 @@
     "legalEmail": "pandastudio.app@gmail.com",
     "workEmail": "scarletpan@pandastudio.hk"
   },
-  "nav": {
-    "en": {
-      "home": "Home",
-      "about": "About",
-      "products": "Products",
-      "contact": "Contact"
-    },
-    "zh": {
-      "home": "首页",
-      "about": "关于我们",
-      "products": "产品",
-      "contact": "联系"
-    }
+  "slogan": {
+    "zh": "你不是一个人在管你的保单",
+    "en": "You’re not alone with your policies."
+  },
+  "vision": {
+    "zh": "让已有保障的家庭，在关键时刻读得懂、用得上自己的保障。",
+    "en": "Helping households that already have coverage understand and use that coverage when it matters."
+  },
+  "role": {
+    "zh": "AI 保单伙伴 · 非持牌经纪、非代投代赔",
+    "en": "AI policy companion · not a licensed broker; we do not sell coverage or file claims for you"
+  },
+  "compliance": {
+    "zh": "工具属性 · 数据本地 · AI 仅供参考",
+    "en": "Tool software · data stays on-device · AI for reference only"
   },
   "home": {
     "en": {
-      "title": "Home",
-      "headline": "Software for personal policy organization",
-      "lead": "Panda Studio (Hangzhou Panda Studio Technology Co., Ltd.) builds consumer software. We help people organize and understand insurance policy materials they already hold — we do not sell, broker, or underwrite insurance."
+      "headline": "You’re not alone with your policies.",
+      "vision": "Helping households that already have coverage understand and use that coverage when it matters.",
+      "lead": "Panda Studio is the consumer brand of Hangzhou Panda Studio Technology Co., Ltd. — a one-person technology company building practical software for families who already hold insurance policies.",
+      "ctaProducts": "See PolicyPal",
+      "ctaContact": "Contact"
     },
     "zh": {
-      "title": "首页",
-      "headline": "面向个人的保单整理软件",
-      "lead": "潘达工房（杭州潘达工房科技有限公司）从事消费级软件产品。我们帮助用户整理与理解其已持有的保单材料——我们不销售、经纪或承保保险。"
+      "headline": "你不是一个人在管你的保单",
+      "vision": "让已有保障的家庭，在关键时刻读得懂、用得上自己的保障。",
+      "lead": "潘达工房是杭州潘达工房科技有限公司的消费级品牌。我们是一家一人公司，为已有保单的家庭做务实的软件工具。",
+      "ctaProducts": "了解保管",
+      "ctaContact": "联系我们"
     }
   },
   "about": {
     "en": {
-      "title": "About",
-      "intro": "Panda Studio is the consumer brand of Hangzhou Panda Studio Technology Co., Ltd., a technology company registered in Hangzhou, Zhejiang, China mainland.",
-      "sections": {
-        "legalName": "Legal name",
-        "registeredAddress": "Registered address",
-        "creditCode": "Unified Social Credit Code",
-        "founded": "Date of establishment"
-      }
+      "intro": "Panda Studio builds consumer software. We are a one-person limited company (OPC) focused on tools that help households understand coverage they already own — not on selling insurance.",
+      "whyTitle": "Why we built this",
+      "whyLead": "Two real incidents showed the gap between “having a policy” and “being able to use it when it matters.”",
+      "why1Title": "A sprained ankle",
+      "why1": "The family held two accident policies with different roles. At the clinic it was unclear which hospital tier applied — one case was settled by goodwill, which is not a plan for next time.",
+      "why2Title": "A spouse’s illness in pregnancy",
+      "why2": "When the person who manages the policies is the patient, nobody else can read exclusions and care paths from dense PDFs under stress.",
+      "matrixTitle": "Product line",
+      "matrix": [
+        "PolicyPal (保管) — primary product; App ID studio.panda.policy",
+        "Subscription Alarm — next planned app",
+        "FortuneDiary / 富竹 — longer-term personal finance tools"
+      ]
     },
     "zh": {
-      "title": "关于我们",
-      "intro": "潘达工房（Panda Studio）是杭州潘达工房科技有限公司的消费级品牌。公司注册于中国浙江省杭州市。",
-      "sections": {
-        "legalName": "法律全称",
-        "registeredAddress": "注册地址",
-        "creditCode": "统一社会信用代码",
-        "founded": "成立日期"
-      }
+      "intro": "潘达工房做消费级软件。我们是一人有限责任公司（OPC），专注帮已有保单的家庭把保障读懂、用上——不做保险销售。",
+      "whyTitle": "为什么做",
+      "whyLead": "两次真实经历，让我们看见「有保单」和「关键时刻用得上」之间的鸿沟。",
+      "why1Title": "契机一 · 脚崴就医",
+      "why1": "家里配了两份意外险，职责分明；真崴脚时分工早已记不清，社区医院是否符合「二级及以上」也难即时判断——那一次靠通融，但不能指望下次。",
+      "why2Title": "契机二 · 配偶孕期上感",
+      "why2": "管保单的人倒下时，特需路径与妊娠免责难判断；PDF 在手机里，紧急时刻翻不动。",
+      "matrixTitle": "产品线",
+      "matrix": [
+        "保管（PolicyPal）— 当前主推；App ID studio.panda.policy",
+        "订阅闹钟 — 已立项的下一款",
+        "财富日记 / 富竹 — 中长期规划中的理财工具"
+      ]
     }
   },
   "products": {
     "en": {
-      "title": "Products",
-      "items": [
-        {
-          "name": "PolicyPal",
-          "nameLocal": "保管",
-          "bundleId": "studio.panda.policy",
-          "summary": "A local-first app to organize insurance policy documents and use bring-your-own-key (BYOK) AI to help interpret policy text on your device.",
-          "disclaimer": "PolicyPal is AI-assisted tool software. Hangzhou Panda Studio Technology Co., Ltd. is not an insurer, insurance broker, insurance agent, or claims adjuster. The app does not sell insurance, recommend products for sale, or file claims on your behalf. AI output is for general reference only; the original policy wording and licensed professionals prevail."
-        }
+      "name": "PolicyPal",
+      "nameLocal": "保管",
+      "bundleId": "studio.panda.policy",
+      "summary": "A local-first app to import policy PDFs, keep structured records on your device, and ask a bring-your-own-key (BYOK) model about the policies you link — with costs you control.",
+      "role": "AI policy companion · not a licensed broker; we do not sell coverage or file claims for you",
+      "helpTitle": "What it helps you do",
+      "helpEase": [
+        "Import on-device policy PDFs into a local archive",
+        "See coverage highlights at a glance",
+        "Ask about hospitals, conditions, and care paths",
+        "Keep multi-turn chat tied to the same policy",
+        "Avoid flipping dozens of PDF pages in a hurry"
+      ],
+      "helpTrust": [
+        "Policies and chats stay on your phone",
+        "No account and no developer backend that collects your data",
+        "BYOK — you bring the model API key and pay the provider",
+        "AI answers are for reference; insurer wording prevails",
+        "Key stored with platform secure storage where implemented"
+      ],
+      "disclaimer": "PolicyPal is AI-assisted tool software. Hangzhou Panda Studio Technology Co., Ltd. is not an insurer, insurance broker, insurance agent, or claims adjuster. The app does not sell insurance or file claims on your behalf.",
+      "copyrightNote": "Android software copyright registered in mainland China (certificate on file; not published here).",
+      "galleryCaptions": [
+        "First-run disclaimer",
+        "Chat sessions",
+        "BYOK model settings",
+        "Policy list",
+        "Chat with linked policy",
+        "AI structured reply"
       ]
     },
     "zh": {
-      "title": "产品",
-      "items": [
-        {
-          "name": "保管",
-          "nameLocal": "PolicyPal",
-          "bundleId": "studio.panda.policy",
-          "summary": "本地优先的保单整理应用：在设备上管理已有保单材料，并通过自带密钥（BYOK）的大模型 API 辅助解读保单文本。",
-          "disclaimer": "「保管」是 AI 辅助工具软件。杭州潘达工房科技有限公司不是保险公司、保险经纪机构、保险代理人或理赔机构。本应用不提供投保、销售或理赔代办服务。AI 生成内容仅供参考；重要事项请以保单原文及持牌专业人士意见为准。"
-        }
+      "name": "保管",
+      "nameLocal": "PolicyPal",
+      "bundleId": "studio.panda.policy",
+      "summary": "本地优先：导入本机保单 PDF、在设备上建立档案，并用自带密钥（BYOK）的大模型围绕已关联保单问答——费用由你自行控制。",
+      "role": "AI 保单伙伴 · 非持牌经纪、非代投代赔",
+      "helpTitle": "能帮用户做什么",
+      "helpEase": [
+        "导入本机 PDF，建立本地保单档案",
+        "列表摘要一眼看清保障重点",
+        "按医院、病情、就医路径追问",
+        "多轮对话始终围绕同一份保单",
+        "紧急时刻少翻几十页条款"
+      ],
+      "helpTrust": [
+        "保单与聊天留在本机",
+        "无账号、无自研后端采集用户数据",
+        "BYOK：自带模型 Key，费用自控",
+        "AI 解读仅供参考，以保司核赔为准",
+        "API Key 使用系统级安全存储（已实现处）"
+      ],
+      "disclaimer": "「保管」是 AI 辅助工具软件。杭州潘达工房科技有限公司不是保险公司、保险经纪机构、保险代理人或理赔机构。本应用不提供投保、销售或理赔代办服务。",
+      "copyrightNote": "Android 版已获中国大陆软件著作权登记（证书存档，不在此公开扫描件）。",
+      "galleryCaptions": [
+        "首启免责声明",
+        "会话列表",
+        "大模型（BYOK）设置",
+        "保单列表",
+        "已关联保单的对话",
+        "AI 结构化回复"
       ]
-    }
-  },
-  "contactPage": {
-    "en": {
-      "title": "Contact",
-      "intro": "For legal, App Store, and general inquiries, please email us.",
-      "legalLabel": "Legal / store contact",
-      "workLabel": "Work email"
-    },
-    "zh": {
-      "title": "联系",
-      "intro": "法律、应用商店及一般事务，请通过邮件联系我们。",
-      "legalLabel": "法律 / 商店联系邮箱",
-      "workLabel": "工作邮箱"
     }
   },
   "footer": {

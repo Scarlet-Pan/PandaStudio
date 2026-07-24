@@ -28,10 +28,12 @@ See [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
 | Path | Page |
 |------|------|
-| `/` | Home |
-| `/about/` | About |
-| `/products/` | Products (PolicyPal / 保管) |
-| `/contact/` | Contact |
+| `/` | Home — Slogan, vision, CTAs, preview screenshots |
+| `/about/` | Legal entity + why we built it + product line |
+| `/products/` | PolicyPal / 保管 — capabilities, disclaimer, screenshot gallery |
+| `/contact/` | Emails + registered address |
+
+Copy source of truth: [`content/site.json`](content/site.json). Brand icons and soft-copyright screenshots live under `assets/brand/` and `assets/screens/` (API Key fields are masked in settings shots).
 
 ## Future KMP
 

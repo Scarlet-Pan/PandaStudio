@@ -11,7 +11,10 @@
 <body>
   <div class="wrap">
     <header class="site-header">
-      <a class="brand" href="/">Panda Studio<span>潘达工房</span></a>
+      <a class="brand" href="/">
+        <img src="../assets/brand/app-icon-zh.png" width="40" height="40" alt="">
+        <span class="brand-text">Panda Studio<span>潘达工房</span></span>
+      </a>
       <nav class="nav" aria-label="Primary">
         <a href="/">Home / 首页</a>
         <a href="/about/">About / 关于</a>
@@ -24,23 +27,151 @@
       <section class="lang-block" lang="en" aria-labelledby="en-products">
         <p class="lang-label">English</p>
         <h1 id="en-products">Products</h1>
-        <article class="product">
-          <h2>PolicyPal <span lang="zh-CN">（保管）</span></h2>
-          <p class="bundle">App ID / Bundle ID: studio.panda.policy</p>
-          <p>A local-first app to organize insurance policy documents and use bring-your-own-key (BYOK) AI to help interpret policy text on your device.</p>
-          <p class="disclaimer">PolicyPal is AI-assisted tool software. Hangzhou Panda Studio Technology Co., Ltd. is not an insurer, insurance broker, insurance agent, or claims adjuster. The app does not sell insurance, recommend products for sale, or file claims on your behalf. AI output is for general reference only; the original policy wording and licensed professionals prevail.</p>
-        </article>
+
+        <div class="product-head">
+          <img src="../assets/brand/hat-en.png" width="64" height="64" alt="PolicyPal">
+          <div>
+            <h2 style="margin:0">PolicyPal <span lang="zh-CN">（保管）</span></h2>
+            <p class="role-line">AI policy companion · not a licensed broker; we do not sell coverage or file claims for you</p>
+          </div>
+        </div>
+        <p class="bundle">App ID / Bundle ID: studio.panda.policy</p>
+        <p>You’re not alone with your policies.</p>
+        <p>A local-first app to import policy PDFs, keep structured records on your device, and ask a bring-your-own-key (BYOK) model about the policies you link — with costs you control.</p>
+
+        <h2>What it helps you do</h2>
+        <div class="feature-cols">
+          <div class="feature-col">
+            <h3>Easier day to day</h3>
+            <ul>
+              <li>Import on-device policy PDFs into a local archive</li>
+              <li>See coverage highlights at a glance</li>
+              <li>Ask about hospitals, conditions, and care paths</li>
+              <li>Keep multi-turn chat tied to the same policy</li>
+              <li>Avoid flipping dozens of PDF pages in a hurry</li>
+            </ul>
+          </div>
+          <div class="feature-col">
+            <h3>Safer by design</h3>
+            <ul>
+              <li>Policies and chats stay on your phone</li>
+              <li>No account and no developer backend that collects your data</li>
+              <li>BYOK — you bring the model API key and pay the provider</li>
+              <li>AI answers are for reference; insurer wording prevails</li>
+              <li>Key stored with platform secure storage where implemented</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="compliance">Tool software · data stays on-device · AI for reference only</p>
+        <p class="disclaimer">PolicyPal is AI-assisted tool software. Hangzhou Panda Studio Technology Co., Ltd. is not an insurer, insurance broker, insurance agent, or claims adjuster. The app does not sell insurance or file claims on your behalf.</p>
+        <p class="muted-note">Android software copyright registered in mainland China (certificate on file; not published here).</p>
+
+        <h2>Screenshots</h2>
+        <div class="gallery">
+          <figure>
+            <img src="../assets/screens/01-disclaimer.jpg" alt="First-run disclaimer" loading="lazy">
+            <figcaption>First-run disclaimer</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/02-sessions.jpg" alt="Chat sessions" loading="lazy">
+            <figcaption>Chat sessions</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/03-settings.jpg" alt="BYOK model settings" loading="lazy">
+            <figcaption>BYOK model settings</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/04-policies.jpg" alt="Policy list" loading="lazy">
+            <figcaption>Policy list</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/05-chat-linked.jpg" alt="Chat with linked policy" loading="lazy">
+            <figcaption>Chat with linked policy</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/06-chat-ai.jpg" alt="AI structured reply" loading="lazy">
+            <figcaption>AI structured reply</figcaption>
+          </figure>
+        </div>
+
+        <h2>Coming next</h2>
+        <p class="muted-note">Subscription Alarm is planned as the next app. FortuneDiary and related finance tools remain longer-term.</p>
       </section>
 
       <section class="lang-block" lang="zh-CN" aria-labelledby="zh-products">
         <p class="lang-label">中文</p>
         <h1 id="zh-products">产品</h1>
-        <article class="product">
-          <h2>保管 <span lang="en">（PolicyPal）</span></h2>
-          <p class="bundle">App ID / Bundle ID: studio.panda.policy</p>
-          <p>本地优先的保单整理应用：在设备上管理已有保单材料，并通过自带密钥（BYOK）的大模型 API 辅助解读保单文本。</p>
-          <p class="disclaimer">「保管」是 AI 辅助工具软件。杭州潘达工房科技有限公司不是保险公司、保险经纪机构、保险代理人或理赔机构。本应用不提供投保、销售或理赔代办服务。AI 生成内容仅供参考；重要事项请以保单原文及持牌专业人士意见为准。</p>
-        </article>
+
+        <div class="product-head">
+          <img src="../assets/brand/hat-zh.png" width="64" height="64" alt="保管">
+          <div>
+            <h2 style="margin:0">保管 <span lang="en">（PolicyPal）</span></h2>
+            <p class="role-line">AI 保单伙伴 · 非持牌经纪、非代投代赔</p>
+          </div>
+        </div>
+        <p class="bundle">App ID / Bundle ID: studio.panda.policy</p>
+        <p>你不是一个人在管你的保单</p>
+        <p>本地优先：导入本机保单 PDF、在设备上建立档案，并用自带密钥（BYOK）的大模型围绕已关联保单问答——费用由你自行控制。</p>
+
+        <h2>能帮用户做什么</h2>
+        <div class="feature-cols">
+          <div class="feature-col">
+            <h3>用起来省心</h3>
+            <ul>
+              <li>导入本机 PDF，建立本地保单档案</li>
+              <li>列表摘要一眼看清保障重点</li>
+              <li>按医院、病情、就医路径追问</li>
+              <li>多轮对话始终围绕同一份保单</li>
+              <li>紧急时刻少翻几十页条款</li>
+            </ul>
+          </div>
+          <div class="feature-col">
+            <h3>用起来安心</h3>
+            <ul>
+              <li>保单与聊天留在本机</li>
+              <li>无账号、无自研后端采集用户数据</li>
+              <li>BYOK：自带模型 Key，费用自控</li>
+              <li>AI 解读仅供参考，以保司核赔为准</li>
+              <li>API Key 使用系统级安全存储（已实现处）</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="compliance">工具属性 · 数据本地 · AI 仅供参考</p>
+        <p class="disclaimer">「保管」是 AI 辅助工具软件。杭州潘达工房科技有限公司不是保险公司、保险经纪机构、保险代理人或理赔机构。本应用不提供投保、销售或理赔代办服务。</p>
+        <p class="muted-note">Android 版已获中国大陆软件著作权登记（证书存档，不在此公开扫描件）。</p>
+
+        <h2>界面截图</h2>
+        <div class="gallery">
+          <figure>
+            <img src="../assets/screens/01-disclaimer.jpg" alt="首启免责声明" loading="lazy">
+            <figcaption>首启免责声明</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/02-sessions.jpg" alt="会话列表" loading="lazy">
+            <figcaption>会话列表</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/03-settings.jpg" alt="大模型设置" loading="lazy">
+            <figcaption>大模型（BYOK）设置</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/04-policies.jpg" alt="保单列表" loading="lazy">
+            <figcaption>保单列表</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/05-chat-linked.jpg" alt="已关联保单对话" loading="lazy">
+            <figcaption>已关联保单的对话</figcaption>
+          </figure>
+          <figure>
+            <img src="../assets/screens/06-chat-ai.jpg" alt="AI 结构化回复" loading="lazy">
+            <figcaption>AI 结构化回复</figcaption>
+          </figure>
+        </div>
+
+        <h2>下一步</h2>
+        <p class="muted-note">订阅闹钟为已立项的下一款。财富日记 / 富竹属中长期规划，官网仅作一笔带过。</p>
       </section>
     </main>
 
