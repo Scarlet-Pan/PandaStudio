@@ -10,18 +10,22 @@ This repo root **is** the site root (`index.html`, `about/`, `products/`, `conta
 
 ## 2. GitHub Pages + custom domain
 
-1. Repo **Settings → Pages**
-2. Source: `main` / `/` (root)
-3. Custom domain: `pandastudio.hk`
-4. Wait for DNS check, then enable **Enforce HTTPS**
-5. Confirm the repo contains a `CNAME` file with exactly:
+Already applied by this repo (after push to `main`):
+
+- Source: `main` / `/` (root)
+- Custom domain from `CNAME` file: `pandastudio.hk`
+
+In GitHub UI, still confirm:
+
+1. Repo **Settings → Pages** shows Custom domain `pandastudio.hk`
+2. After DNS verifies (green check), enable **Enforce HTTPS**
+3. `CNAME` file at repo root contains exactly:
 
    ```
    pandastudio.hk
    ```
 
-Temporary URL before DNS: `https://scarlet-pan.github.io/PandaStudio/`  
-(With a custom domain configured, prefer testing `https://pandastudio.hk/` after DNS propagates.)
+**Preview before DNS works:** with a custom domain set, `https://scarlet-pan.github.io/PandaStudio/` may **301** to `pandastudio.hk`. Until DNS points at GitHub, that apex URL will fail — finish §3 first, or temporarily clear the custom domain in Pages settings to preview on `*.github.io`.
 
 ## 3. DNS records (`.hk` registrar)
 
