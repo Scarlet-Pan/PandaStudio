@@ -40,12 +40,15 @@
         </div>
 
         <div class="demo-slot">
-          <div class="demo-frame">
-            <!-- Drop assets/demo/policypal-demo.mp4 then enable:
-            <video controls playsinline preload="metadata" src="assets/demo/policypal-demo.mp4"></video>
-            -->
-            <p class="demo-label">Product demo</p>
-            <p class="demo-hint">A short walkthrough of PolicyPal on Android &amp; iOS (about 2–3 minutes). Video file will appear here when published — see screenshots below meanwhile.</p>
+          <div class="demo-frame has-video" data-demo-video>
+            <video controls playsinline preload="metadata"
+              poster="assets/screens/05-chat-linked.jpg"
+              src="assets/demo/policypal-demo.mp4">
+            </video>
+            <div data-demo-fallback hidden>
+              <p class="demo-label">Product demo</p>
+              <p class="demo-hint">Add <code>assets/demo/policypal-demo.mp4</code>, commit &amp; push — then this player works on GitHub Pages. See <code>assets/demo/README.md</code>.</p>
+            </div>
           </div>
         </div>
 
@@ -74,9 +77,15 @@
         </div>
 
         <div class="demo-slot">
-          <div class="demo-frame">
-            <p class="demo-label">产品演示</p>
-            <p class="demo-hint">保管在 Android / iOS 上的短演示（约 2–3 分钟）。成片上线后将嵌在此处；目前可先看下方截图与产品页。</p>
+          <div class="demo-frame has-video" data-demo-video>
+            <video controls playsinline preload="metadata"
+              poster="assets/screens/05-chat-linked.jpg"
+              src="assets/demo/policypal-demo.mp4">
+            </video>
+            <div data-demo-fallback hidden>
+              <p class="demo-label">产品演示</p>
+              <p class="demo-hint">将成片放到 <code>assets/demo/policypal-demo.mp4</code> 并推送后，此处即可在线播放。说明见 <code>assets/demo/README.md</code>。</p>
+            </div>
           </div>
         </div>
 
@@ -101,5 +110,6 @@
       <p>© Hangzhou Panda Studio Technology Co., Ltd. / 杭州潘达工房科技有限公司</p>
     </footer>
   </div>
+  <script src="assets/demo-player.js" defer></script>
 </body>
 </html>

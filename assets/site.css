@@ -402,6 +402,13 @@ p {
   gap: 0.5rem;
   padding: 1.25rem;
   text-align: center;
+  overflow: hidden;
+}
+
+.demo-frame:has(video:not([hidden])) {
+  padding: 0;
+  background: #000;
+  display: block;
 }
 
 .demo-frame video {

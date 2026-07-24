@@ -49,6 +49,17 @@ If the registrar offers **ALIAS / ANAME** for apex → `scarlet-pan.github.io`, 
 
 Propagation: often minutes to a few hours; rarely up to 48h.
 
+## 3b. Demo video (optional but recommended)
+
+1. Put H.264 MP4 at `assets/demo/policypal-demo.mp4` (prefer trim **0:00–2:42**, ideally **&lt; 30 MB**).
+2. Commit & push `main`.
+3. Pages will serve: `https://pandastudio.hk/assets/demo/policypal-demo.mp4`  
+   Home / Products embed a `<video controls>` player pointing at that path.
+
+Details: [`assets/demo/README.md`](../assets/demo/README.md).
+
+If the file is huge, use YouTube/Bilibili embed or object storage instead of committing the binary.
+
 ## 4. About `pandastudio.app`
 
 Enrollment and Apple Case replies should use **`https://pandastudio.hk/`** only.  
