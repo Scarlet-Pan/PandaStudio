@@ -33,7 +33,9 @@ See [`docs/DEPLOY.md`](docs/DEPLOY.md).
 | `/products/` | PolicyPal / 保管 — capabilities, disclaimer, screenshot gallery |
 | `/contact/` | Emails + registered address |
 
-Copy source of truth: [`content/site.json`](content/site.json). Brand icons and soft-copyright screenshots live under `assets/brand/` and `assets/screens/` (API Key fields are masked in settings shots).
+## Demo video
+
+Place a trimmed file at [`assets/demo/policypal-demo.mp4`](assets/demo/policypal-demo.mp4) (about 0:00–2:42), then uncomment the `<video>` tags on Home / Products. Source path from pitch docs was not available on the build machine.
 
 ## Future KMP
 
