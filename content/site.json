@@ -56,13 +56,13 @@
       "whyLead": "Two real incidents showed the gap between “having a policy” and “being able to use it when it matters.”",
       "why1Title": "A sprained ankle",
       "why1": "The family held two accident policies with different roles. At the clinic it was unclear which hospital tier applied — one case was settled by goodwill, which is not a plan for next time.",
-      "why2Title": "A spouse’s illness in pregnancy",
-      "why2": "When the person who manages the policies is the patient, nobody else can read exclusions and care paths from dense PDFs under stress.",
+      "why2Title": "When the usual organizer is unavailable",
+      "why2": "If the person who normally manages the household’s policies cannot help in the moment, others are left staring at long PDFs — hospital rules, exclusions, and care paths are hard to find under stress.",
       "matrixTitle": "Product line",
       "matrix": [
         "PolicyPal (保管) — first shipping product; Android & iOS; App ID studio.panda.policy",
-        "Next app — in progress; name withheld until announcement",
-        "Further apps — on the roadmap; names confidential for now"
+        "Next app — in the works; another consumer utility from the same studio",
+        "Further apps — on the roadmap; introduced as each product matures"
       ]
     },
     "zh": {
@@ -71,13 +71,13 @@
       "whyLead": "两次真实经历，让我们看见「有保单」和「关键时刻用得上」之间的鸿沟。",
       "why1Title": "契机一 · 脚崴就医",
       "why1": "家里配了两份意外险，职责分明；真崴脚时分工早已记不清，社区医院是否符合「二级及以上」也难即时判断——那一次靠通融，但不能指望下次。",
-      "why2Title": "契机二 · 配偶孕期上感",
-      "why2": "管保单的人倒下时，特需路径与妊娠免责难判断；PDF 在手机里，紧急时刻翻不动。",
+      "why2Title": "契机二 · 管保单的人不在场",
+      "why2": "家里平时整理保单的人一时顾不上时，其他人很难从几十页 PDF 里立刻找到医院等级、免责与就医路径——紧急时刻翻不动。",
       "matrixTitle": "产品线",
       "matrix": [
         "保管（PolicyPal）— 首款上架；Android / iOS；App ID studio.panda.policy",
-        "下一款 — 在研；名称暂不公开",
-        "更多产品 — 规划中；名称保密"
+        "下一款 — 筹备中；同属消费级工具",
+        "更多产品 — 规划中；随产品成熟陆续推出"
       ]
     }
   },

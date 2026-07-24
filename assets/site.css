@@ -196,10 +196,15 @@ a:hover {
   border: 1px solid var(--line);
 }
 
-.home-shots img {
+.home-shots img,
+.gallery img {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 9 / 18.5;
+  object-fit: cover;
+  object-position: top center;
+  vertical-align: middle;
 }
 
 @media (max-width: 640px) {
@@ -526,13 +531,6 @@ p {
   background: var(--card);
   border: 1px solid var(--line);
   overflow: hidden;
-}
-
-.gallery img {
-  display: block;
-  width: 100%;
-  height: auto;
-  vertical-align: middle;
 }
 
 .gallery figcaption {
