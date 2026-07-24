@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "brand": "Panda Studio",
+    "brandZh": "潘达工房",
+    "siteUrl": "https://pandastudio.hk",
+    "routes": ["/", "/about/", "/products/", "/contact/"]
+  },
+  "legal": {
+    "nameZh": "杭州潘达工房科技有限公司",
+    "nameEn": "Hangzhou Panda Studio Technology Co., Ltd.",
+    "addressZh": "浙江省杭州市余杭区闲林街道天目山西路230号A区3楼2773室",
+    "addressEn": "Room 2773, 3F, Block A, No. 230 Tianmushan West Road, Xianlin Sub-district, Yuhang District, Hangzhou, Zhejiang 311100, China mainland",
+    "creditCode": "91330110MAKF8GHX2E",
+    "founded": "2020-06-08"
+  },
+  "contact": {
+    "legalEmail": "pandastudio.app@gmail.com",
+    "workEmail": "scarletpan@pandastudio.hk"
+  },
+  "nav": {
+    "en": {
+      "home": "Home",
+      "about": "About",
+      "products": "Products",
+      "contact": "Contact"
+    },
+    "zh": {
+      "home": "首页",
+      "about": "关于我们",
+      "products": "产品",
+      "contact": "联系"
+    }
+  },
+  "home": {
+    "en": {
+      "title": "Home",
+      "headline": "Software for personal policy organization",
+      "lead": "Panda Studio (Hangzhou Panda Studio Technology Co., Ltd.) builds consumer software. We help people organize and understand insurance policy materials they already hold — we do not sell, broker, or underwrite insurance."
+    },
+    "zh": {
+      "title": "首页",
+      "headline": "面向个人的保单整理软件",
+      "lead": "潘达工房（杭州潘达工房科技有限公司）从事消费级软件产品。我们帮助用户整理与理解其已持有的保单材料——我们不销售、经纪或承保保险。"
+    }
+  },
+  "about": {
+    "en": {
+      "title": "About",
+      "intro": "Panda Studio is the consumer brand of Hangzhou Panda Studio Technology Co., Ltd., a technology company registered in Hangzhou, Zhejiang, China mainland.",
+      "sections": {
+        "legalName": "Legal name",
+        "registeredAddress": "Registered address",
+        "creditCode": "Unified Social Credit Code",
+        "founded": "Date of establishment"
+      }
+    },
+    "zh": {
+      "title": "关于我们",
+      "intro": "潘达工房（Panda Studio）是杭州潘达工房科技有限公司的消费级品牌。公司注册于中国浙江省杭州市。",
+      "sections": {
+        "legalName": "法律全称",
+        "registeredAddress": "注册地址",
+        "creditCode": "统一社会信用代码",
+        "founded": "成立日期"
+      }
+    }
+  },
+  "products": {
+    "en": {
+      "title": "Products",
+      "items": [
+        {
+          "name": "PolicyPal",
+          "nameLocal": "保管",
+          "bundleId": "studio.panda.policy",
+          "summary": "A local-first app to organize insurance policy documents and use bring-your-own-key (BYOK) AI to help interpret policy text on your device.",
+          "disclaimer": "PolicyPal is AI-assisted tool software. Hangzhou Panda Studio Technology Co., Ltd. is not an insurer, insurance broker, insurance agent, or claims adjuster. The app does not sell insurance, recommend products for sale, or file claims on your behalf. AI output is for general reference only; the original policy wording and licensed professionals prevail."
+        }
+      ]
+    },
+    "zh": {
+      "title": "产品",
+      "items": [
+        {
+          "name": "保管",
+          "nameLocal": "PolicyPal",
+          "bundleId": "studio.panda.policy",
+          "summary": "本地优先的保单整理应用：在设备上管理已有保单材料，并通过自带密钥（BYOK）的大模型 API 辅助解读保单文本。",
+          "disclaimer": "「保管」是 AI 辅助工具软件。杭州潘达工房科技有限公司不是保险公司、保险经纪机构、保险代理人或理赔机构。本应用不提供投保、销售或理赔代办服务。AI 生成内容仅供参考；重要事项请以保单原文及持牌专业人士意见为准。"
+        }
+      ]
+    }
+  },
+  "contactPage": {
+    "en": {
+      "title": "Contact",
+      "intro": "For legal, App Store, and general inquiries, please email us.",
+      "legalLabel": "Legal / store contact",
+      "workLabel": "Work email"
+    },
+    "zh": {
+      "title": "联系",
+      "intro": "法律、应用商店及一般事务，请通过邮件联系我们。",
+      "legalLabel": "法律 / 商店联系邮箱",
+      "workLabel": "工作邮箱"
+    }
+  },
+  "footer": {
+    "copyrightLine": "© Hangzhou Panda Studio Technology Co., Ltd. / 杭州潘达工房科技有限公司"
+  }
+}
