@@ -29,9 +29,7 @@ Source noted in FortuneDiary: `Demo录像-配音字幕-定稿.md`
 
 5. Hard-refresh the site; click play. No extra hosting required.
 
-If the file is missing, the page keeps the text placeholder (player hides on load error).
-
-## Alternatives (if the file is too large)
+When ready, place the mp4 here. Home / Products use a native player with poster [`poster.jpg`](poster.jpg) (placeholder-style cover).
 
 - Upload to YouTube / Bilibili and embed an iframe instead of committing the MP4.
 - Or host the MP4 on object storage (R2/S3) and point `src` to that URL.
