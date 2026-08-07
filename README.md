@@ -37,13 +37,15 @@ Copy source of truth: [`content/site.json`](content/site.json). Soft-copyright s
 
 ### Store legal URLs (PolicyPal)
 
-| Doc | URL |
-|-----|-----|
-| Privacy | https://pandastudio.hk/legal/policypal/privacy.html |
-| Terms | https://pandastudio.hk/legal/policypal/terms.html |
-| Hub | https://pandastudio.hk/legal/ |
+| Track | Doc | URL |
+|-------|-----|-----|
+| Global (AI / Play · iOS) | Privacy | https://pandastudio.hk/legal/policypal/privacy.html |
+| Global | Terms | https://pandastudio.hk/legal/policypal/terms.html |
+| Mainland Android (no AI) | Privacy | https://pandastudio.hk/legal/policypal/cn/privacy.html |
+| Mainland Android | Terms | https://pandastudio.hk/legal/policypal/cn/terms.html |
+| Hub | — | https://pandastudio.hk/legal/policypal/ |
 
-Generated from FortuneDiary `strings_legal.xml` via [`scripts/gen_legal.py`](scripts/gen_legal.py). Future products: add `legal/<slug>/`.
+Generated from FortuneDiary `strings_legal.xml` (`globalMain` / `chinaMain`) via [`scripts/gen_legal.py`](scripts/gen_legal.py).
 
 ## Future KMP
 
