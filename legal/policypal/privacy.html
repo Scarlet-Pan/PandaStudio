@@ -27,11 +27,13 @@
       <section class="lang-block" lang="zh-CN">
         <p class="lang-label">中文（正式）</p>
         <h1>隐私政策</h1>
-        <p class="meta">更新日期：2026-08-20</p>
-        <p class="meta">适用 保管（PolicyPal） · 文档版本 1.1.0</p>
-        <p class="meta">适用应用版本：1.1 及以上</p>
+        <p class="meta">更新日期：2026-08-23</p>
+        <p class="meta">适用 保管（PolicyPal） · 文档版本 1.1.1</p>
+        <p class="meta">适用应用版本：1.1及以上</p>
+        <p class="muted-note">本页适用于全球版（Google Play / App Store 等，含可选 AI 与 Firebase Crashlytics），与应用内嵌全文一致。大陆安卓商店版（无生成式 AI / 无 Firebase）请见 cn/ 目录。</p>
+        <p class="muted-note">以上为应用内置完整版本，无需联网即可阅读。商店登记之在线地址仅作备案，不以网络访问为前提。</p>
         <h2>一、引言</h2>
-<p>欢迎使用 保管（PolicyPal）（以下简称「本应用」）。</p>
+<p>欢迎使用 保管（PolicyPal）（PolicyPal）（以下简称「本应用」）。</p>
 <p>本应用由杭州潘达工房科技有限公司（英文品牌：Panda Studio，以下简称「我们」或「开发者」）提供。我们重视您的隐私。本政策说明我们如何处理与您使用本应用相关的信息。</p>
 <p>重要说明：本应用以本地保单档案管理为主，并提供可选的人工智能辅助功能；我们不是保险公司、保险经纪机构或保险代理人。本应用不提供用户注册账号功能。</p>
 <p>请在使用前仔细阅读本政策。使用本应用即表示您理解并同意本政策。</p>
@@ -41,7 +43,9 @@
 <p>2.2 存储在您设备上的信息</p>
 <p>为提供核心功能，以下数据保存在您的设备本地：API Key（您自行配置的第三方大模型 API 密钥）；聊天会话（对话记录、会话标题等）；保单资料（您导入或录入的保单信息、PDF 附件及从 PDF 提取的文本）；应用设置；合规记录（您是否已同意用户协议与隐私政策）；匿名设备标识（用于保障在线辅助功能的安全与公平使用，非账号体系）。</p>
 <p>2.3 设备权限</p>
-<p>本应用可能使用：网络访问（连接您配置的第三方大模型 API，或调用开发者提供的在线辅助服务）；读取/选择文件（由您主动选择保单 PDF 等文件，优先通过系统文件选择器）；通过系统界面跳转至系统日历（由您主动添加到期提醒，本应用不读取或写入您的日历内容）。本应用不申请相机、通讯录、定位等与核心功能无关的敏感权限。</p>
+<p>本应用可能使用：网络访问（连接您配置的第三方大模型 API、调用开发者提供的在线辅助服务，或在崩溃/严重异常时向 Firebase Crashlytics 发送诊断信息）；读取/选择文件（由您主动选择保单 PDF 等文件，优先通过系统文件选择器）；通过系统界面跳转至系统日历（由您主动添加到期提醒，本应用不读取或写入您的日历内容）。本应用不申请相机、通讯录、定位等与核心功能无关的敏感权限。</p>
+<p>2.4 稳定性与诊断信息</p>
+<p>当本应用发生崩溃或严重异常时，可能生成诊断信息并发送至 Firebase Crashlytics（见第三节）。此类信息不属于您主动录入的保单资料或聊天内容。</p>
 <h2>三、信息如何被使用与传输</h2>
 <p>3.1 本地使用</p>
 <p>本地存储的数据用于：展示与管理保单档案、进行 AI 对话、保存您的设置与会话历史。</p>
@@ -50,12 +54,16 @@
 <p>API Key 仅保存在您的设备上，开发者不会收集或存储您的 API Key。第三方对您数据的处理受该服务商的用户协议与隐私政策约束。</p>
 <p>3.3 开发者在线辅助服务</p>
 <p>当您主动使用导入辅助录入、刷新列表说明等在线辅助功能时，本应用会将实现该功能所必要的信息（例如保单相关文本或字段信息，以及匿名设备标识）通过加密连接发送至开发者提供的服务进行实时处理。开发者不在服务器持久保存您的保单正文或附件内容，不建立用户账号档案，不将上述内容用于广告或模型训练。</p>
-<p>3.4 我们不会做的事</p>
+<p>3.4 稳定性与崩溃诊断（Firebase Crashlytics）</p>
+<p>本全球版（通过 Google Play、App Store 等渠道分发并集成 Firebase 的构建）使用 Google 提供的 Firebase Crashlytics 服务，用于在发生应用崩溃或严重异常时收集诊断信息，以改进应用稳定性。可能传输至 Google（Firebase）的信息包括：崩溃堆栈与相关技术日志；设备型号、操作系统版本、应用版本；用于区分安装实例的匿名标识符。上述信息用于故障排查与稳定性分析，不用于广告，亦不用于识别您的真实身份。</p>
+<p>我们不会通过 Crashlytics 主动上传您的保单正文、PDF 附件、聊天内容或 API Key。Google 对相关数据的处理受其隐私政策与 Firebase 服务条款约束。</p>
+<p>3.5 我们不会做的事</p>
 <p>不向广告商共享您的保单或聊天内容；不代您向保险公司投保、索赔或销售保险产品。</p>
 <h2>四、信息的保留与删除</h2>
 <p>本地数据：保存在您的设备上，直至您在应用内删除相关会话/保单、清除应用数据，或卸载本应用。</p>
 <p>开发者服务：在线辅助请求在实时处理完成后结束，开发者不以存档为目的在服务器持久保存您的保单正文或附件。</p>
 <p>第三方大模型服务：第三方对您发送内容的保留期限与删除方式，请查阅该服务商的政策。</p>
+<p>崩溃诊断：经 Firebase Crashlytics 上报的诊断数据由 Google 按其服务政策保留与删除；您可通过卸载本应用停止后续上报。</p>
 <h2>五、未成年人</h2>
 <p>本应用主要面向成年人管理个人保单信息。我们不主动面向未满 14 周岁的未成年人提供服务。</p>
 <p>若您是未成年人，请在监护人同意并指导下使用本应用。监护人如对未成年人使用本应用有疑问，请通过下文联系方式与我们联系。</p>
@@ -77,11 +85,13 @@
       <section class="lang-block" lang="en">
         <p class="lang-label">English</p>
         <h1>Privacy Policy</h1>
-        <p class="meta">Updated: 2026-08-20</p>
-        <p class="meta">Applies to PolicyPal (保管) · Document version 1.1.0</p>
-        <p class="meta">App version 1.1 and later</p>
+        <p class="meta">Updated: 2026-08-23</p>
+        <p class="meta">Applies to PolicyPal (保管) · Document version 1.1.1</p>
+        <p class="meta">App version: 1.1 and later</p>
+        <p class="muted-note">This page applies to the global build (Google Play / App Store, including optional AI and Firebase Crashlytics) and matches the in-app full text. For the mainland Android store build (no generative AI / no Firebase), see the cn/ folder.</p>
+        <p class="muted-note">This is the full in-app version and can be read without an internet connection. The online URL registered with app stores is for record-keeping only.</p>
         <h2>1. Introduction</h2>
-<p>Welcome to PolicyPal (保管) (&quot;the App&quot;).</p>
+<p>Welcome to PolicyPal (保管) (保管) (&quot;the App&quot;).</p>
 <p>The App is provided by Hangzhou Panda Studio Technology Co., Ltd. (Panda Studio, &quot;we&quot; or &quot;the developer&quot;). We respect your privacy. This policy explains how we handle information related to your use of the App.</p>
 <p>Important: The App focuses on local policy archiving with optional AI-assisted features. We are not an insurer, insurance broker, or insurance agent. The App has no account registration.</p>
 <p>Please read this policy before use. By using the App, you acknowledge and agree to this policy.</p>
@@ -89,9 +99,11 @@
 <p>2.1 Accounts and advertising</p>
 <p>We do not require account registration. We do not sell your personal information to advertisers.</p>
 <p>2.2 Data stored on your device</p>
-<p>To provide core features, the following stays on your device: your API key; chat sessions; policy records and PDF attachments (and extracted text); app settings; local records of your acceptance of the terms and privacy policy; and an anonymous device identifier (for security and fair use of online assist features—not an account).</p>
+<p>To provide core features, the following stays on your device: your API key; chat sessions; policy records and PDF attachments (and extracted text); app settings; local records of your acceptance of the terms and privacy policy; and an anonymous device identifier (for security and fair use of online assist features-not an account).</p>
 <p>2.3 Permissions</p>
-<p>The App may use: network access (to call the third-party LLM API you configure, or developer-provided online assist services); file picking (for PDFs you choose via the system picker); and system calendar intents (when you choose to add expiry reminders—the App does not read or write your calendar). We do not request camera, contacts, location, or other unrelated sensitive permissions.</p>
+<p>The App may use: network access (to call the third-party LLM API you configure, developer-provided online assist services, or to send diagnostic data to Firebase Crashlytics when a crash or serious exception occurs); file picking (for PDFs you choose via the system picker); and system calendar intents (when you choose to add expiry reminders-the App does not read or write your calendar). We do not request camera, contacts, location, or other unrelated sensitive permissions.</p>
+<p>2.4 Stability and diagnostic data</p>
+<p>If the App crashes or encounters a serious exception, diagnostic data may be collected and sent to Firebase Crashlytics (see Section 3). This is not your policy records or chat content.</p>
 <h2>3. Use and transmission</h2>
 <p>3.1 Local use</p>
 <p>Local data is used to show and manage policy records, run AI chat, and save your settings and history.</p>
@@ -100,12 +112,16 @@
 <p>Your API key stays on your device only. Third-party handling is governed by that provider’s terms and privacy policy.</p>
 <p>3.3 Developer online assist</p>
 <p>When you actively use import assist, list description refresh, or similar online assist features, the App sends information necessary for that request (such as policy-related text or fields, and the anonymous device identifier) over encrypted connections to services we provide for real-time processing. We do not persistently store your policy body or attachments on our servers, do not maintain user account profiles, and do not use that content for advertising or model training.</p>
-<p>3.4 What we do not do</p>
+<p>3.4 Stability and crash diagnostics (Firebase Crashlytics)</p>
+<p>This global build (distributed via channels such as Google Play and the App Store with Firebase integrated) uses Google’s Firebase Crashlytics to collect diagnostic data when the App crashes or hits a serious exception, so we can improve stability. Data that may be sent to Google (Firebase) includes: crash stack traces and related technical logs; device model, OS version, and app version; and an anonymous identifier that distinguishes installs. This is used for troubleshooting and stability analysis only—not for advertising, and not to identify you personally.</p>
+<p>We do not intentionally upload your policy body, PDF attachments, chat content, or API key through Crashlytics. Google’s handling of such data is governed by its privacy policy and Firebase terms.</p>
+<p>3.5 What we do not do</p>
 <p>We do not share your policies or chats with advertisers. We do not sell insurance or file claims on your behalf.</p>
 <h2>4. Retention and deletion</h2>
 <p>Local data remains until you delete sessions or policies in the App, clear app data, or uninstall the App.</p>
 <p>Developer services: online assist requests end after real-time processing; we do not persistently store your policy body or attachments on servers for archiving purposes.</p>
 <p>Third-party LLM providers: see their policies for retention and deletion.</p>
+<p>Crash diagnostics: diagnostic data reported via Firebase Crashlytics is retained and deleted by Google under its service policies. Uninstalling the App stops further reports from that install.</p>
 <h2>5. Minors</h2>
 <p>The App is intended primarily for adults managing their own policies. We do not knowingly target children under 14.</p>
 <p>Minors should use the App only with guardian consent and supervision. Guardians may contact us using the details below.</p>

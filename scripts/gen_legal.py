@@ -1,29 +1,82 @@
 # -*- coding: utf-8 -*-
 """Generate PolicyPal legal HTML from FortuneDiary strings_legal.xml.
 
-Global (AI/BYOK): feature/setting/pal/.../commonMain or globalMain strings_legal
-China (local archive, no AI): .../chinaMain/strings_legal
+Global (AI/BYOK + Crashlytics): feature/setting/pal/.../globalMain strings_legal
+China (local archive, no AI / no Firebase): .../chinaMain/strings_legal
 
 Usage (from PandaStudio repo root):
-  python scripts/gen_legal.py
+  python3 scripts/gen_legal.py
+  # optional: FORTUNEDIARY=/path/to/FortuneDiary python3 scripts/gen_legal.py
 """
 from __future__ import annotations
 
 import html
+import os
 import pathlib
 import re
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
-FD = pathlib.Path(r"D:\AndroidStudioProjects\FortuneDiary")
-SETTING_PAL = FD / "feature" / "setting" / "pal" / "src"
 
-APP_ZH, APP_EN, VER = "保管（PolicyPal）", "PolicyPal (保管)", "1.0.0"
+
+def resolve_fortunediary() -> pathlib.Path:
+    env = os.environ.get("FORTUNEDIARY")
+    if env:
+        return pathlib.Path(env).expanduser().resolve()
+    # Common layouts: sibling of PandaStudio, or Windows AndroidStudioProjects path.
+    candidates = [
+        REPO.parent / "FortuneDiary",
+        pathlib.Path(r"D:\AndroidStudioProjects\FortuneDiary"),
+        pathlib.Path.home() / "Projects" / "FortuneDiary",
+    ]
+    for c in candidates:
+        if (c / "feature" / "setting" / "pal").is_dir():
+            return c.resolve()
+    raise SystemExit(
+        "FortuneDiary not found. Set FORTUNEDIARY=/path/to/FortuneDiary "
+        "or place it next to the PandaStudio repo."
+    )
+
+
+FD = resolve_fortunediary()
+SETTING_PAL = FD / "feature" / "setting" / "pal" / "src"
+LEGAL_KT = (
+    SETTING_PAL
+    / "commonMain"
+    / "kotlin"
+    / "studio"
+    / "panda"
+    / "insurance"
+    / "setting"
+    / "pal"
+    / "LegalDocuments.kt"
+)
+
+APP_ZH, APP_EN = "保管（PolicyPal）", "PolicyPal (保管)"
+
+
+def read_legal_meta() -> tuple[str, str, str, str]:
+    text = LEGAL_KT.read_text(encoding="utf-8")
+
+    def const(name: str) -> str:
+        m = re.search(rf'internal const val {name} = "([^"]+)"', text)
+        if not m:
+            raise SystemExit(f"{name} not found in LegalDocuments.kt")
+        return m.group(1)
+
+    return (
+        const("UPDATED_DATE"),
+        const("DOCUMENT_VERSION"),
+        const("APP_VERSION_LINE_ZH"),
+        const("APP_VERSION_LINE_EN"),
+    )
+
+
+UPDATED_DATE, DOC_VER, APP_VER_ZH, APP_VER_EN = read_legal_meta()
 
 REGIONS = {
     "global": {
         "zh": SETTING_PAL / "globalMain" / "composeResources" / "values-zh" / "strings_legal.xml",
         "en": SETTING_PAL / "globalMain" / "composeResources" / "values" / "strings_legal.xml",
-        # fallback if globalMain missing older trees used commonMain
         "zh_fallback": SETTING_PAL / "commonMain" / "composeResources" / "values-zh" / "strings_legal.xml",
         "en_fallback": SETTING_PAL / "commonMain" / "composeResources" / "values" / "strings_legal.xml",
         "out_dir": REPO / "legal" / "policypal",
@@ -31,8 +84,15 @@ REGIONS = {
         "canonical_base": "https://pandastudio.hk/legal/policypal",
         "hub_href": "./",
         "hub_label": "PolicyPal · 法律文档",
-        "track_note_zh": None,
-        "track_note_en": None,
+        "track_note_zh": (
+            "本页适用于全球版（Google Play / App Store 等，含可选 AI 与 Firebase Crashlytics），"
+            "与应用内嵌全文一致。大陆安卓商店版（无生成式 AI / 无 Firebase）请见 cn/ 目录。"
+        ),
+        "track_note_en": (
+            "This page applies to the global build (Google Play / App Store, including optional AI "
+            "and Firebase Crashlytics) and matches the in-app full text. For the mainland Android "
+            "store build (no generative AI / no Firebase), see the cn/ folder."
+        ),
     },
     "china": {
         "zh": SETTING_PAL / "chinaMain" / "composeResources" / "values-zh" / "strings_legal.xml",
@@ -44,8 +104,15 @@ REGIONS = {
         "canonical_base": "https://pandastudio.hk/legal/policypal/cn",
         "hub_href": "./",
         "hub_label": "PolicyPal · 大陆版法律文档",
-        "track_note_zh": "本页适用于大陆安卓商店发行的 保管 版本（无生成式 AI / 无 BYOK），与应用内嵌全文一致。全球版（含 AI）请见上级目录法律页。",
-        "track_note_en": "This page applies to the mainland Android store build of PolicyPal (no generative AI / no BYOK) and matches the in-app full text. For the global (AI) build, see the parent legal pages.",
+        "track_note_zh": (
+            "本页适用于大陆安卓商店发行的 保管 版本（无生成式 AI / 无 BYOK / 无 Firebase），"
+            "与应用内嵌全文一致。全球版请见上级目录法律页。"
+        ),
+        "track_note_en": (
+            "This page applies to the mainland Android store build of PolicyPal "
+            "(no generative AI / no BYOK / no Firebase) and matches the in-app full text. "
+            "For the global build, see the parent legal pages."
+        ),
     },
 }
 
@@ -81,8 +148,10 @@ def load_region(region: str) -> tuple[dict[str, str], dict[str, str]]:
     return load(cfg["zh"], cfg["zh_fallback"]), load(cfg["en"], cfg["en_fallback"])
 
 
-def fill(s: str, app: str, ver: str) -> str:
-    return s.replace("%1$s", app).replace("%2$s", ver)
+def fill(s: str, app: str, ver_line: str) -> str:
+    # %1$s app name; %2$s used as app-version line in section bodies that pass 2 args
+    # (in-app: appName + appVersionLine). Website fills the same.
+    return s.replace("%1$s", app).replace("%2$s", ver_line).replace("%3$s", ver_line)
 
 
 def paras(body: str) -> str:
@@ -92,7 +161,7 @@ def paras(body: str) -> str:
     )
 
 
-def sections(d: dict[str, str], prefix: str, app: str) -> str:
+def sections(d: dict[str, str], prefix: str, app: str, ver_line: str) -> str:
     keys = sorted(
         [k for k in d if k.startswith(prefix) and k.endswith("_title")],
         key=lambda k: int(re.search(r"_s(\d+)_", k).group(1)),
@@ -101,8 +170,8 @@ def sections(d: dict[str, str], prefix: str, app: str) -> str:
     for tk in keys:
         n = re.search(r"_s(\d+)_", tk).group(1)
         bk = prefix + f"_s{n}_body"
-        title = fill(d[tk], app, VER)
-        body = fill(d[bk], app, VER)
+        title = fill(d[tk], app, ver_line)
+        body = fill(d[bk], app, ver_line)
         chunks.append(f"<h2>{html.escape(title)}</h2>\n{paras(body)}")
     return "\n".join(chunks)
 
@@ -120,8 +189,6 @@ def page(
     other_label_en: str,
 ) -> str:
     cfg = REGIONS[region]
-    meta_zh = fill(zh_map["legal_document_meta"], APP_ZH, VER)
-    meta_en = fill(en_map["legal_document_meta"], APP_EN, VER)
     notice_zh = zh_map["legal_builtin_notice"]
     notice_en = en_map["legal_builtin_notice"]
     track_zh = cfg["track_note_zh"]
@@ -132,8 +199,12 @@ def page(
     track_en_html = (
         f'\n        <p class="muted-note">{html.escape(track_en)}</p>' if track_en else ""
     )
-    zh_secs = sections(zh_map, f"legal_{'privacy' if doc == 'privacy' else 'terms'}", APP_ZH)
-    en_secs = sections(en_map, f"legal_{'privacy' if doc == 'privacy' else 'terms'}", APP_EN)
+    zh_secs = sections(
+        zh_map, f"legal_{'privacy' if doc == 'privacy' else 'terms'}", APP_ZH, APP_VER_ZH
+    )
+    en_secs = sections(
+        en_map, f"legal_{'privacy' if doc == 'privacy' else 'terms'}", APP_EN, APP_VER_EN
+    )
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -163,14 +234,18 @@ def page(
       <section class="lang-block" lang="zh-CN">
         <p class="lang-label">中文（正式）</p>
         <h1>{html.escape(title_zh)}</h1>
-        <p class="meta">{html.escape(meta_zh)}</p>{track_zh_html}
+        <p class="meta">更新日期：{html.escape(UPDATED_DATE)}</p>
+        <p class="meta">适用 {html.escape(APP_ZH)} · 文档版本 {html.escape(DOC_VER)}</p>
+        <p class="meta">适用应用版本：{html.escape(APP_VER_ZH)}</p>{track_zh_html}
         <p class="muted-note">{html.escape(notice_zh)}</p>
         {zh_secs}
       </section>
       <section class="lang-block" lang="en">
         <p class="lang-label">English</p>
         <h1>{html.escape(title_en)}</h1>
-        <p class="meta">{html.escape(meta_en)}</p>{track_en_html}
+        <p class="meta">Updated: {html.escape(UPDATED_DATE)}</p>
+        <p class="meta">Applies to {html.escape(APP_EN)} · Document version {html.escape(DOC_VER)}</p>
+        <p class="meta">App version: {html.escape(APP_VER_EN)}</p>{track_en_html}
         <p class="muted-note">{html.escape(notice_en)}</p>
         {en_secs}
       </section>
@@ -227,150 +302,8 @@ def write_docs(region: str) -> None:
     print(f"ok {region}", (out / "privacy.html").stat().st_size, (out / "terms.html").stat().st_size)
 
 
-def write_cn_index() -> None:
-    path = REGIONS["china"]["out_dir"] / "index.html"
-    path.write_text(
-        """<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PolicyPal · 大陆版法律文档 · Panda Studio</title>
-  <meta name="description" content="Mainland Android store legal pages for PolicyPal (保管) — no generative AI.">
-  <link rel="canonical" href="https://pandastudio.hk/legal/policypal/cn/">
-  <link rel="stylesheet" href="../../../assets/site.css">
-</head>
-<body>
-  <div class="wrap">
-    <header class="site-header">
-      <a class="brand" href="/">
-        <span class="logo-mark" aria-hidden="true">潘达</span>
-        <span class="brand-text">Panda Studio<span>潘达工房</span></span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="/">Home / 首页</a>
-        <a href="/products/">Products / 产品</a>
-        <a href="/about/">About / 关于</a>
-        <a href="/contact/">Contact / 联系</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="lang-block" lang="zh-CN">
-        <p class="lang-label">中文</p>
-        <h1>保管 · 大陆版法律文档</h1>
-        <p class="meta">杭州潘达工房科技有限公司 · 文档版本 1.0.0 · 无生成式 AI / 无 BYOK</p>
-        <p class="muted-note">供小米、腾讯应用宝、华为等大陆安卓商店登记；正文与大陆包应用内嵌全文一致。全球版（含 AI）见 <a href="../">上级法律文档</a>。</p>
-        <ul class="matrix-list">
-          <li><a href="privacy.html">隐私政策</a> — <code>https://pandastudio.hk/legal/policypal/cn/privacy.html</code></li>
-          <li><a href="terms.html">用户协议与免责声明</a> — <code>https://pandastudio.hk/legal/policypal/cn/terms.html</code></li>
-        </ul>
-        <p class="muted-note"><a href="../../">全部产品 · 法律与合规</a></p>
-      </section>
-
-      <section class="lang-block" lang="en">
-        <p class="lang-label">English</p>
-        <h1>PolicyPal · Mainland Legal</h1>
-        <p class="meta">Hangzhou Panda Studio Technology Co., Ltd. · Document version 1.0.0 · No generative AI / no BYOK</p>
-        <p class="muted-note">For mainland Android store listings. Matches the china-flavor in-app full text. Global (AI) build: <a href="../">parent legal hub</a>.</p>
-        <ul class="matrix-list">
-          <li><a href="privacy.html">Privacy Policy</a> — <code>https://pandastudio.hk/legal/policypal/cn/privacy.html</code></li>
-          <li><a href="terms.html">Terms of Service and Disclaimer</a> — <code>https://pandastudio.hk/legal/policypal/cn/terms.html</code></li>
-        </ul>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <nav aria-label="Footer">
-        <a href="/">Home</a>
-        <a href="/products/">Products</a>
-        <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a href="/legal/">Legal</a>
-      </nav>
-      <p>© Hangzhou Panda Studio Technology Co., Ltd. / 杭州潘达工房科技有限公司</p>
-    </footer>
-  </div>
-</body>
-</html>
-""",
-        encoding="utf-8",
-    )
-    print("ok cn index")
-
-
-def patch_global_index() -> None:
-    path = REPO / "legal" / "policypal" / "index.html"
-    text = path.read_text(encoding="utf-8")
-    if "policypal/cn/" in text:
-        print("global index already links cn")
-        return
-    needle_zh = """        <ul class="matrix-list">
-          <li><a href="privacy.html">隐私政策</a> — <code>https://pandastudio.hk/legal/policypal/privacy.html</code></li>
-          <li><a href="terms.html">用户协议与免责声明</a> — <code>https://pandastudio.hk/legal/policypal/terms.html</code></li>
-        </ul>
-        <p class="muted-note"><a href="../">全部产品 · 法律与合规</a></p>"""
-    repl_zh = """        <ul class="matrix-list">
-          <li><a href="privacy.html">隐私政策</a>（全球 / AI） — <code>https://pandastudio.hk/legal/policypal/privacy.html</code></li>
-          <li><a href="terms.html">用户协议与免责声明</a>（全球 / AI） — <code>https://pandastudio.hk/legal/policypal/terms.html</code></li>
-          <li><a href="cn/">大陆安卓商店版</a>（无 AI） — <code>https://pandastudio.hk/legal/policypal/cn/</code></li>
-        </ul>
-        <p class="muted-note"><a href="../">全部产品 · 法律与合规</a></p>"""
-    needle_en = """        <ul class="matrix-list">
-          <li><a href="privacy.html">Privacy Policy</a> — <code>https://pandastudio.hk/legal/policypal/privacy.html</code></li>
-          <li><a href="terms.html">Terms of Service and Disclaimer</a> — <code>https://pandastudio.hk/legal/policypal/terms.html</code></li>
-        </ul>
-        <p class="muted-note"><a href="../">All products · Legal</a></p>"""
-    repl_en = """        <ul class="matrix-list">
-          <li><a href="privacy.html">Privacy Policy</a> (global / AI) — <code>https://pandastudio.hk/legal/policypal/privacy.html</code></li>
-          <li><a href="terms.html">Terms of Service and Disclaimer</a> (global / AI) — <code>https://pandastudio.hk/legal/policypal/terms.html</code></li>
-          <li><a href="cn/">Mainland Android store</a> (no AI) — <code>https://pandastudio.hk/legal/policypal/cn/</code></li>
-        </ul>
-        <p class="muted-note"><a href="../">All products · Legal</a></p>"""
-    if needle_zh not in text or needle_en not in text:
-        raise SystemExit("index.html markers not found; update manually")
-    path.write_text(text.replace(needle_zh, repl_zh).replace(needle_en, repl_en), encoding="utf-8")
-    print("ok patched global index")
-
-
-def patch_readme() -> None:
-    path = REPO / "README.md"
-    text = path.read_text(encoding="utf-8")
-    if "policypal/cn/privacy.html" in text:
-        print("readme already has cn urls")
-        return
-    old = """### Store legal URLs (PolicyPal)
-
-| Doc | URL |
-|-----|-----|
-| Privacy | https://pandastudio.hk/legal/policypal/privacy.html |
-| Terms | https://pandastudio.hk/legal/policypal/terms.html |
-| Hub | https://pandastudio.hk/legal/ |
-
-Generated from FortuneDiary `strings_legal.xml` via [`scripts/gen_legal.py`](scripts/gen_legal.py). Future products: add `legal/<slug>/`.
-"""
-    new = """### Store legal URLs (PolicyPal)
-
-| Track | Doc | URL |
-|-------|-----|-----|
-| Global (AI / Play · iOS) | Privacy | https://pandastudio.hk/legal/policypal/privacy.html |
-| Global | Terms | https://pandastudio.hk/legal/policypal/terms.html |
-| Mainland Android (no AI) | Privacy | https://pandastudio.hk/legal/policypal/cn/privacy.html |
-| Mainland Android | Terms | https://pandastudio.hk/legal/policypal/cn/terms.html |
-| Hub | — | https://pandastudio.hk/legal/policypal/ |
-
-Generated from FortuneDiary `strings_legal.xml` (`globalMain` / `chinaMain`) via [`scripts/gen_legal.py`](scripts/gen_legal.py).
-"""
-    if old not in text:
-        raise SystemExit("README markers not found")
-    path.write_text(text.replace(old, new), encoding="utf-8")
-    print("ok patched readme")
-
-
 if __name__ == "__main__":
-    # Only regenerate china pages here; leave global HTML as currently published
-    # unless you intentionally re-run write_docs("global").
+    print(f"FortuneDiary={FD}")
+    print(f"doc={DOC_VER} updated={UPDATED_DATE}")
+    write_docs("global")
     write_docs("china")
-    write_cn_index()
-    patch_global_index()
-    patch_readme()
