@@ -54,7 +54,7 @@ LEGAL_KT = (
 APP_ZH, APP_EN = "保管（PolicyPal）", "PolicyPal (保管)"
 
 
-def read_legal_meta() -> tuple[str, str, str, str]:
+def read_app_version_lines() -> tuple[str, str]:
     text = LEGAL_KT.read_text(encoding="utf-8")
 
     def const(name: str) -> str:
@@ -63,15 +63,36 @@ def read_legal_meta() -> tuple[str, str, str, str]:
             raise SystemExit(f"{name} not found in LegalDocuments.kt")
         return m.group(1)
 
-    return (
-        const("UPDATED_DATE"),
-        const("DOCUMENT_VERSION"),
-        const("APP_VERSION_LINE_ZH"),
-        const("APP_VERSION_LINE_EN"),
+    return const("APP_VERSION_LINE_ZH"), const("APP_VERSION_LINE_EN")
+
+
+def read_revision(region: str) -> tuple[str, str]:
+    """UPDATED_DATE, DOCUMENT_VERSION from flavor actual (global / china 可不同步)."""
+    fname = (
+        "LegalDocumentRevision.global.kt"
+        if region == "global"
+        else "LegalDocumentRevision.china.kt"
     )
+    path = (
+        SETTING_PAL
+        / ("globalMain" if region == "global" else "chinaMain")
+        / "kotlin"
+        / "studio"
+        / "panda"
+        / "insurance"
+        / "setting"
+        / "pal"
+        / fname
+    )
+    text = path.read_text(encoding="utf-8")
+    updated = re.search(r'UPDATED_DATE:\s*String\s*=\s*"([^"]+)"', text)
+    version = re.search(r'DOCUMENT_VERSION:\s*String\s*=\s*"([^"]+)"', text)
+    if not updated or not version:
+        raise SystemExit(f"revision constants not found in {path}")
+    return updated.group(1), version.group(1)
 
 
-UPDATED_DATE, DOC_VER, APP_VER_ZH, APP_VER_EN = read_legal_meta()
+APP_VER_ZH, APP_VER_EN = read_app_version_lines()
 
 REGIONS = {
     "global": {
@@ -189,6 +210,7 @@ def page(
     other_label_en: str,
 ) -> str:
     cfg = REGIONS[region]
+    updated_date, doc_ver = read_revision(region)
     notice_zh = zh_map["legal_builtin_notice"]
     notice_en = en_map["legal_builtin_notice"]
     track_zh = cfg["track_note_zh"]
@@ -234,8 +256,8 @@ def page(
       <section class="lang-block" lang="zh-CN">
         <p class="lang-label">中文（正式）</p>
         <h1>{html.escape(title_zh)}</h1>
-        <p class="meta">更新日期：{html.escape(UPDATED_DATE)}</p>
-        <p class="meta">适用 {html.escape(APP_ZH)} · 文档版本 {html.escape(DOC_VER)}</p>
+        <p class="meta">更新日期：{html.escape(updated_date)}</p>
+        <p class="meta">适用 {html.escape(APP_ZH)} · 文档版本 {html.escape(doc_ver)}</p>
         <p class="meta">适用应用版本：{html.escape(APP_VER_ZH)}</p>{track_zh_html}
         <p class="muted-note">{html.escape(notice_zh)}</p>
         {zh_secs}
@@ -243,8 +265,8 @@ def page(
       <section class="lang-block" lang="en">
         <p class="lang-label">English</p>
         <h1>{html.escape(title_en)}</h1>
-        <p class="meta">Updated: {html.escape(UPDATED_DATE)}</p>
-        <p class="meta">Applies to {html.escape(APP_EN)} · Document version {html.escape(DOC_VER)}</p>
+        <p class="meta">Updated: {html.escape(updated_date)}</p>
+        <p class="meta">Applies to {html.escape(APP_EN)} · Document version {html.escape(doc_ver)}</p>
         <p class="meta">App version: {html.escape(APP_VER_EN)}</p>{track_en_html}
         <p class="muted-note">{html.escape(notice_en)}</p>
         {en_secs}
@@ -304,6 +326,7 @@ def write_docs(region: str) -> None:
 
 if __name__ == "__main__":
     print(f"FortuneDiary={FD}")
-    print(f"doc={DOC_VER} updated={UPDATED_DATE}")
-    write_docs("global")
-    write_docs("china")
+    for r in ("global", "china"):
+        d, v = read_revision(r)
+        print(f"{r}: doc={v} updated={d}")
+        write_docs(r)
