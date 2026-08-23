@@ -66,32 +66,6 @@ def read_app_version_lines() -> tuple[str, str]:
     return const("APP_VERSION_LINE_ZH"), const("APP_VERSION_LINE_EN")
 
 
-def read_revision(region: str) -> tuple[str, str]:
-    """UPDATED_DATE, DOCUMENT_VERSION from flavor actual (global / china 可不同步)."""
-    fname = (
-        "LegalDocumentRevision.global.kt"
-        if region == "global"
-        else "LegalDocumentRevision.china.kt"
-    )
-    path = (
-        SETTING_PAL
-        / ("globalMain" if region == "global" else "chinaMain")
-        / "kotlin"
-        / "studio"
-        / "panda"
-        / "insurance"
-        / "setting"
-        / "pal"
-        / fname
-    )
-    text = path.read_text(encoding="utf-8")
-    updated = re.search(r'UPDATED_DATE:\s*String\s*=\s*"([^"]+)"', text)
-    version = re.search(r'DOCUMENT_VERSION:\s*String\s*=\s*"([^"]+)"', text)
-    if not updated or not version:
-        raise SystemExit(f"revision constants not found in {path}")
-    return updated.group(1), version.group(1)
-
-
 APP_VER_ZH, APP_VER_EN = read_app_version_lines()
 
 REGIONS = {
@@ -154,6 +128,24 @@ def parse_xml(path: pathlib.Path) -> dict[str, str]:
         )
         out[k] = v
     return out
+
+
+def read_revision(region: str) -> tuple[str, str]:
+    """From strings_legal.xml: legal_document_dates / legal_document_meta (zh)."""
+    cfg = REGIONS[region]
+    zh_path = cfg["zh"] if cfg["zh"].is_file() else cfg["zh_fallback"]
+    if not zh_path or not zh_path.is_file():
+        raise SystemExit(f"zh strings not found for {region}")
+    zh = parse_xml(zh_path)
+    dates = zh.get("legal_document_dates", "")
+    meta = zh.get("legal_document_meta", "")
+    m_date = re.search(r"(20\d{2}-\d{2}-\d{2})", dates)
+    m_ver = re.search(r"(?:文档版本|Document version)\s*([0-9.]+)", meta)
+    if not m_date or not m_ver:
+        raise SystemExit(
+            f"cannot parse date/version from {zh_path}: dates={dates!r} meta={meta!r}"
+        )
+    return m_date.group(1), m_ver.group(1)
 
 
 def load_region(region: str) -> tuple[dict[str, str], dict[str, str]]:
