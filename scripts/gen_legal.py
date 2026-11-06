@@ -77,13 +77,6 @@ def read_kt_const(kt_path: pathlib.Path, name: str) -> str:
     return m.group(1)
 
 
-def read_app_version_lines(kt_path: pathlib.Path) -> tuple[str, str]:
-    return (
-        read_kt_const(kt_path, "APP_VERSION_LINE_ZH"),
-        read_kt_const(kt_path, "APP_VERSION_LINE_EN"),
-    )
-
-
 def read_strings_name(strings_xml: pathlib.Path, key: str) -> str:
     text = strings_xml.read_text(encoding="utf-8")
     m = re.search(rf'<string name="{re.escape(key)}">([^<]+)</string>', text)
@@ -92,17 +85,17 @@ def read_strings_name(strings_xml: pathlib.Path, key: str) -> str:
     return m.group(1)
 
 
-PAL_APP_VER_ZH, PAL_APP_VER_EN = read_app_version_lines(PAL_LEGAL_KT)
-DUE_APP_VER_ZH, DUE_APP_VER_EN = read_app_version_lines(DUE_LEGAL_KT)
-DUE_DOC_VER = read_kt_const(DUE_LEGAL_KT, "DOCUMENT_VERSION")
-DUE_APP_NAME_ZH = read_strings_name(
-    SETTING_DUE / "composeResources" / "values-zh" / "strings.xml",
-    "setting_due_app_name",
-)
-DUE_APP_NAME_EN = read_strings_name(
-    SETTING_DUE / "composeResources" / "values" / "strings.xml",
-    "setting_due_app_name",
-)
+def read_app_version_lines_from_legal(
+    zh_legal: pathlib.Path, en_legal: pathlib.Path
+) -> tuple[str, str]:
+    zh = parse_xml(zh_legal).get("legal_app_version_line")
+    en = parse_xml(en_legal).get("legal_app_version_line")
+    if not zh or not en:
+        raise SystemExit(
+            f"legal_app_version_line missing in {zh_legal} / {en_legal}"
+        )
+    return zh, en
+
 
 PAL_REGIONS = {
     "global": {
@@ -164,6 +157,25 @@ def parse_xml(path: pathlib.Path) -> dict[str, str]:
         )
         out[k] = v
     return out
+
+
+PAL_APP_VER_ZH, PAL_APP_VER_EN = read_app_version_lines_from_legal(
+    SETTING_PAL / "commonMain" / "composeResources" / "values-zh" / "strings.xml",
+    SETTING_PAL / "commonMain" / "composeResources" / "values" / "strings.xml",
+)
+DUE_APP_VER_ZH, DUE_APP_VER_EN = read_app_version_lines_from_legal(
+    SETTING_DUE / "composeResources" / "values-zh" / "strings_legal.xml",
+    SETTING_DUE / "composeResources" / "values" / "strings_legal.xml",
+)
+DUE_DOC_VER = read_kt_const(DUE_LEGAL_KT, "DOCUMENT_VERSION")
+DUE_APP_NAME_ZH = read_strings_name(
+    SETTING_DUE / "composeResources" / "values-zh" / "strings.xml",
+    "setting_due_app_name",
+)
+DUE_APP_NAME_EN = read_strings_name(
+    SETTING_DUE / "composeResources" / "values" / "strings.xml",
+    "setting_due_app_name",
+)
 
 
 def read_policypal_revision(region: str) -> tuple[str, str]:
